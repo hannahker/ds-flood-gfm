@@ -25,14 +25,17 @@ from rasterio.transform import from_bounds
 import os
 from datetime import datetime, timedelta
 import pystac_client
+from dotenv import load_dotenv
 
 # Import custom geo utils
-from ds_flood_gfm.geo_utils import (
+from src.ds_flood_gfm.geo_utils import (
     load_admin_from_blob,
     generate_cache_key,
     generate_rdylgn_colors,
 )
-from ds_flood_gfm.country_config import get_bbox, GHSL_RASTER_BLOB_PATH
+from src.ds_flood_gfm.country_config import get_bbox, GHSL_RASTER_BLOB_PATH
+
+load_dotenv()
 
 # Constants
 PIXEL_AREA_M2 = 400  # 20m x 20m = 400 m²
