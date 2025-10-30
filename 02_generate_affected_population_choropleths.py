@@ -219,7 +219,7 @@ def main(
     print("=" * 80)
 
     # Ensure output directory exists
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    # Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     # Get bounding box from country config
     bbox = get_bbox(iso3)
@@ -612,7 +612,7 @@ def create_map_from_cache(
     )
     output_path = f"{output_dir}/{output_filename}"
     save_plot_to_blob(plt, output_path)
-    plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
+    #plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
     print(f"\nSaved: {output_path}")
     plt.close()
 
@@ -993,9 +993,9 @@ def create_map_from_cache(
             choropleth_filename = f"{iso3}_population_{mode_suffix}_adm{adm_level}_{target_date.replace('-', '')}.png"
             choropleth_path = f"{output_dir}/{choropleth_filename}"
             save_plot_to_blob(plt, choropleth_path)
-            plt.savefig(
-                choropleth_path, dpi=150, bbox_inches="tight", facecolor="white"
-            )
+            # plt.savefig(
+            #     choropleth_path, dpi=150, bbox_inches="tight", facecolor="white"
+            # )
             print(f"Saved: {choropleth_path}")
             plt.close()
 
@@ -1459,7 +1459,7 @@ def create_map_from_stac(
     )
     output_path = f"{output_dir}/{output_filename}"
     save_plot_to_blob(plt, output_path)
-    plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
+    # plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
     print(f"\nSaved: {output_path}")
     plt.close()
 
@@ -1843,9 +1843,9 @@ def create_map_from_stac(
             choropleth_filename = f"{iso3}_population_{mode_suffix}_adm{adm_level}_{target_date.replace('-', '')}.png"
             choropleth_path = f"{output_dir}/{choropleth_filename}"
             save_plot_to_blob(plt, choropleth_path)
-            plt.savefig(
-                choropleth_path, dpi=150, bbox_inches="tight", facecolor="white"
-            )
+            # plt.savefig(
+            #     choropleth_path, dpi=150, bbox_inches="tight", facecolor="white"
+            # )
             print(f"Saved: {choropleth_path}")
             plt.close()
 
@@ -1868,8 +1868,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--n-latest",
         type=str,
-        default=3,
-        help="Number of most recent observations to use (default: 3)",
+        help="Number of most recent observations to use",
     )
     parser.add_argument(
         "--iso3", type=str, default="JAM", help="ISO3 country code (default: JAM)"
