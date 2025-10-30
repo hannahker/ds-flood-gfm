@@ -60,6 +60,7 @@ from src.ds_flood_gfm.country_config import (
     get_bbox,
     GHSL_RASTER_BLOB_PATH,
 )
+from src.ds_flood_gfm.blob import save_plot_to_blob
 
 load_dotenv()
 
@@ -610,6 +611,7 @@ def create_map_from_cache(
         f"{iso3}_{density_type}_provenance_{target_date.replace('-', '')}.png"
     )
     output_path = f"{output_dir}/{output_filename}"
+    save_plot_to_blob(plt, output_path)
     plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
     print(f"\nSaved: {output_path}")
     plt.close()
@@ -990,6 +992,7 @@ def create_map_from_cache(
             mode_suffix = "cumulative" if flood_mode == "cumulative" else "latest"
             choropleth_filename = f"{iso3}_population_{mode_suffix}_adm{adm_level}_{target_date.replace('-', '')}.png"
             choropleth_path = f"{output_dir}/{choropleth_filename}"
+            save_plot_to_blob(plt, choropleth_path)
             plt.savefig(
                 choropleth_path, dpi=150, bbox_inches="tight", facecolor="white"
             )
@@ -1455,6 +1458,7 @@ def create_map_from_stac(
         f"{iso3}_{density_type}_provenance_{target_date.replace('-', '')}.png"
     )
     output_path = f"{output_dir}/{output_filename}"
+    save_plot_to_blob(plt, output_path)
     plt.savefig(output_path, dpi=150, bbox_inches="tight", facecolor="white")
     print(f"\nSaved: {output_path}")
     plt.close()
@@ -1838,6 +1842,7 @@ def create_map_from_stac(
             mode_suffix = "cumulative" if flood_mode == "cumulative" else "latest"
             choropleth_filename = f"{iso3}_population_{mode_suffix}_adm{adm_level}_{target_date.replace('-', '')}.png"
             choropleth_path = f"{output_dir}/{choropleth_filename}"
+            save_plot_to_blob(plt, choropleth_path)
             plt.savefig(
                 choropleth_path, dpi=150, bbox_inches="tight", facecolor="white"
             )
@@ -1862,7 +1867,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--n-latest",
-        type=int,
+        type=str,
         default=3,
         help="Number of most recent observations to use (default: 3)",
     )
@@ -1896,7 +1901,7 @@ if __name__ == "__main__":
 
     main(
         args.end_date,
-        args.n_latest,
+        int(args.n_latest),
         args.iso3,
         args.cache_dir,
         use_cache=not args.no_cache,
