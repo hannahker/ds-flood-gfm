@@ -1241,26 +1241,26 @@ def create_map_from_stac(
         provenance_indexed[provenance_target.values == date] = idx
 
     # ========== SAVE TO CACHE ==========
-    if cache_dir and cache_key:
-        metadata = {
-            "total_pixels": len(flood_points),
-            "provenance_breakdown": {
-                str(pd.Timestamp(date))[:10]: int(
-                    np.sum(provenance_target.values == date)
-                )
-                for date in unique_dates
-            },
-            "no_data_pixels": int(np.sum(pd.isna(provenance_target.values))),
-        }
-        save_cache(
-            cache_dir,
-            cache_key,
-            flood_points,
-            provenance_indexed,
-            provenance_target,
-            unique_dates,
-            metadata,
-        )
+    # if cache_dir and cache_key:
+    #     metadata = {
+    #         "total_pixels": len(flood_points),
+    #         "provenance_breakdown": {
+    #             str(pd.Timestamp(date))[:10]: int(
+    #                 np.sum(provenance_target.values == date)
+    #             )
+    #             for date in unique_dates
+    #         },
+    #         "no_data_pixels": int(np.sum(pd.isna(provenance_target.values))),
+    #     }
+    #     save_cache(
+    #         cache_dir,
+    #         cache_key,
+    #         flood_points,
+    #         provenance_indexed,
+    #         provenance_target,
+    #         unique_dates,
+    #         metadata,
+    #     )
     # ========== END SAVE CACHE ==========
 
     # Create figure
